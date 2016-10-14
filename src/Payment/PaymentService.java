@@ -1,7 +1,8 @@
+package Payment;
+
 import itello.example.payments.PaymentReceiver;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
