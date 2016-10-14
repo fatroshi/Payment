@@ -44,10 +44,10 @@ public class OpeningRecord {
     @Override
     public String toString(){
         String infoAboutObject = "";
-        infoAboutObject += "Öppningspost\n";
-        infoAboutObject += "Posttyp: "           + this.getPostType()        + "\t";
-        infoAboutObject += "Clearingnummer: "    + this.getClearing()  + "\t";
-        infoAboutObject += "Kontonummer: "       + this.getAccount()   + "\t";
+        infoAboutObject += "### Öppningspost\n";
+        infoAboutObject += "Posttyp: "           + this.getPostType()       + "\t";
+        infoAboutObject += "Clearingnummer: "    + this.getClearing()       + "\t";
+        infoAboutObject += "Kontonummer: "       + this.getAccountNumber()  + "\t\n";
         return infoAboutObject;
     }
 

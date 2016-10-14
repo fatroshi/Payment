@@ -1,7 +1,10 @@
 package Payment;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,9 +24,15 @@ public class Payment {
     }
 
     public void setAccountNumber(String accountNumber){
-        this.openingRecord.setAccount(accountNumber);
-    }
+        if(accountNumber.contains(" ")) {
+            String segments[] = accountNumber.split(" ");
+            this.openingRecord.setClearing(segments[0]);
+            this.openingRecord.setAccountNumber(segments[1]);
+        }else{
+            this.openingRecord.setAccount(accountNumber);
+        }
 
+    }
 
     public OpeningRecord getOpeningRecord() {
         return openingRecord;
@@ -49,11 +58,22 @@ public class Payment {
         this.paymentRecords.add(paymentRecord);
     }
 
+    public Date strToDate(String dateString, String dateFormat){
+        Date date = null;
+
+        try {
+            date = new SimpleDateFormat(dateFormat).parse(trimWhiteSpace(dateString));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }finally {
+            return date;
+        }
+    }
 
     private String cleanDecimalNumbers(String strNumbers){
         String cleanNumbers = strNumbers;
-        cleanNumbers = cleanNumbers.replace(",",".");
         cleanNumbers = cleanNumbers.replace(" ","");
+        cleanNumbers = cleanNumbers.replace(",",".");
         return cleanNumbers;
     }
 

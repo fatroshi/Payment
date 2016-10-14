@@ -10,20 +10,19 @@ import java.util.List;
  * Created by Elise on 2016-10-14.
  */
 
-
-
-
 public class PaymentService extends Payment implements PaymentReceiver{
     private BigDecimal amount;
     private List<String> lines;
     private int paymentQuantity;
     private String currency;
     private Date paymentDate;
+
+
     public PaymentService(List<String> lines){
         this.lines = lines;
         this.setOpeningRecord();                    // Init. and fetch information for OpeningRecord
         this.setPaymentRecords();
-
+        this.sendPayments();
     }
 
     private void setOpeningRecord(){
@@ -41,10 +40,11 @@ public class PaymentService extends Payment implements PaymentReceiver{
         this.setAmount(super.strToBigDecimal(tmp));
         // Set paymentQuantity
         tmp = openingRecordStr.substring(PaymentService_.QUANTITY.start(), PaymentService_.QUANTITY.end());
+        tmp = trimWhiteSpace(tmp);
         this.setPaymentQuantity(Integer.parseInt(tmp));
         // Set date
         tmp = openingRecordStr.substring(PaymentService_.PAYMENT_DATE.start(), PaymentService_.PAYMENT_DATE.end());
-
+        this.paymentDate = super.strToDate(tmp,"yyyyMMdd");
         // Set Currency
         tmp = openingRecordStr.substring(PaymentService_.CURRENCY.start(), PaymentService_.CURRENCY.end());
         this.setCurrency(tmp);
@@ -74,19 +74,28 @@ public class PaymentService extends Payment implements PaymentReceiver{
         this.currency = currency;
     }
 
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 
     private void setPaymentRecords(){
-
         String postType;
         String amount;
         String reference;
-
         PaymentRecord paymentRecord;
+
+        String line;
+
         for(int i = 1; i < this.paymentQuantity + 1; i++ ){
+            line = this.lines.get(i);
             // Get info from line
-            postType    = this.lines.get(i).substring(PaymentService_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.start());
-            amount      = this.lines.get(i).substring(PaymentService_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.start());
-            reference   = this.lines.get(i).substring(PaymentService_.REFERENCE.start(), PaymentService_.REFERENCE.start());
+            postType    = line.substring(PaymentService_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.end());
+            amount      = line.substring(PaymentService_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.end());
+            reference   = line.substring(PaymentService_.REFERENCE.start(), PaymentService_.REFERENCE.end());
             // Create PaymentRecord object
             paymentRecord = new PaymentRecord(postType,super.strToBigDecimal(amount),reference);
             // Add to list
@@ -126,8 +135,15 @@ public class PaymentService extends Payment implements PaymentReceiver{
 
     @Override
     public String toString(){
-        String string = "";
+        String info = "";
+        info += super.getOpeningRecord().toString();
+        info += "Betalningsdatum: " + this.getPaymentDate() + "";
+        info += "\nValuta: "          + this.getCurrency() + "\n";
+        info += "### Betalningspost\n";
+        for(PaymentRecord payment: super.getPaymentRecords()){
+            info += payment.toString();
+        }
 
-        return string;
+        return info;
     }
 }
