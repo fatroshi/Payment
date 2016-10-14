@@ -5,13 +5,14 @@ package Payment;
  */
 public enum PaymentService_ {
 
-    OPENING_RECORD(0,1),
+    OPENING_RECORD_POST_TYPE(0,1),
     ACOOUNT_NUMBER(1,16),
-    AMOUNT(16,30),
+    TOTAL_AMOUNT(16,30),
     QUANTITY(30,40),
     PAYMENT_DATE(40,48),
     CURRENCY(48,51),
 
+    PAYMENT_POST_TYPE (0,1),
     PAYMENT_AMOUNT(1,15),
     REFERENCE(15,50);
 

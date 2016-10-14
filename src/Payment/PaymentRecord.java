@@ -9,6 +9,28 @@ public class PaymentRecord {
     private String postType;
     private BigDecimal amount;
     private String reference;
+    private boolean send;
+
+
+    public PaymentRecord(){
+
+    }
+
+    public PaymentRecord(String postType, BigDecimal amount, String reference){
+        this.postType   = postType;
+        this.amount     = amount;
+        this.reference  = reference;
+        this.send       = false;
+    }
+
+
+    public boolean isSend() {
+        return send;
+    }
+
+    public void setSend(boolean send) {
+        this.send = send;
+    }
 
     public String getPostType() {
         return postType;

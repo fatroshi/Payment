@@ -5,9 +5,9 @@ package Payment;
  */
 public class OpeningRecord {
     private String postType;
-    private String clearingNumber;
+    private String clearing;
+    private String account;
     private String accountNumber;
-
 
     public String getPostType() {
         return postType;
@@ -17,12 +17,20 @@ public class OpeningRecord {
         this.postType = postType;
     }
 
-    public String getClearingNumber() {
-        return clearingNumber;
+    public String getClearing() {
+        return clearing;
     }
 
-    public void setClearingNumber(String clearingNumber) {
-        this.clearingNumber = clearingNumber;
+    public void setClearing(String clearing) {
+        this.clearing = clearing;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getAccountNumber() {
@@ -33,14 +41,13 @@ public class OpeningRecord {
         this.accountNumber = accountNumber;
     }
 
-
     @Override
     public String toString(){
         String infoAboutObject = "";
         infoAboutObject += "Öppningspost\n";
         infoAboutObject += "Posttyp: "           + this.getPostType()        + "\t";
-        infoAboutObject += "Clearingnummer: "    + this.getClearingNumber()  + "\t";
-        infoAboutObject += "Kontonummer: "       + this.getAccountNumber()   + "\t";
+        infoAboutObject += "Clearingnummer: "    + this.getClearing()  + "\t";
+        infoAboutObject += "Kontonummer: "       + this.getAccount()   + "\t";
         return infoAboutObject;
     }
 

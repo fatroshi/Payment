@@ -1,5 +1,6 @@
 package Payment;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,14 @@ public class Payment {
         this.paymentRecords = new ArrayList<>();
     }
 
-    public void setAccountNumber(String accountNumber){
-        this.openingRecord.setAccountNumber(accountNumber);
+    public void setOpeningRecordPostType(String postType){
+        this.openingRecord.setPostType(postType);
     }
+
+    public void setAccountNumber(String accountNumber){
+        this.openingRecord.setAccount(accountNumber);
+    }
+
 
     public OpeningRecord getOpeningRecord() {
         return openingRecord;
@@ -39,10 +45,21 @@ public class Payment {
         return string.replace(" ", "");
     }
 
+    public void addPaymentRecord(PaymentRecord paymentRecord){
+        this.paymentRecords.add(paymentRecord);
+    }
+
+
     private String cleanDecimalNumbers(String strNumbers){
         String cleanNumbers = strNumbers;
         cleanNumbers = cleanNumbers.replace(",",".");
         cleanNumbers = cleanNumbers.replace(" ","");
         return cleanNumbers;
+    }
+
+    public BigDecimal strToBigDecimal(String str){
+        String strToBigDecimal = this.cleanDecimalNumbers(str);
+        BigDecimal bigDecimal = new BigDecimal(strToBigDecimal);
+        return bigDecimal;
     }
 }
