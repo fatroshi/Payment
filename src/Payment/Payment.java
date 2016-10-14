@@ -34,6 +34,27 @@ public class Payment {
 
     }
 
+    public void setPaymentRecords(int paymentQuantity, List<String> lines){
+        String postType;
+        String amount;
+        String reference;
+        PaymentRecord paymentRecord;
+
+        String line;
+
+        for(int i = 1; i < paymentQuantity + 1; i++ ){
+            line = lines.get(i);
+            // Get info from line
+            postType    = line.substring(PaymentService_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.end());
+            amount      = line.substring(PaymentService_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.end());
+            reference   = line.substring(PaymentService_.REFERENCE.start(), PaymentService_.REFERENCE.end());
+            // Create PaymentRecord object
+            paymentRecord = new PaymentRecord(postType,strToBigDecimal(amount),reference);
+            // Add to list
+            addPaymentRecord(paymentRecord);
+        }
+    }
+
     public OpeningRecord getOpeningRecord() {
         return openingRecord;
     }

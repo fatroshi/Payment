@@ -1,3 +1,4 @@
+import Payment.InvoicePayment;
 import Payment.PaymentService;
 import Payment.ReadFile;
 import java.util.List;
@@ -21,6 +22,8 @@ public class PaymentController {
                 System.out.println(paymentService.toString());
                 break;
             case "inbetalningstjansten.txt":
+                InvoicePayment invoicePayment = new InvoicePayment(getFileContent(filePath, "ISO-8859-1"));
+                System.out.println(invoicePayment.toString());
                 break;
             default:
                 break;
