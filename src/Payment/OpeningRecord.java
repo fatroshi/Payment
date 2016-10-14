@@ -43,4 +43,5 @@ public class OpeningRecord {
         infoAboutObject += "Kontonummer: "       + this.getAccountNumber()   + "\t";
         return infoAboutObject;
     }
+
 }

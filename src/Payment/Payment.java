@@ -15,6 +15,9 @@ public class Payment {
         this.paymentRecords = new ArrayList<>();
     }
 
+    public void setAccountNumber(String accountNumber){
+        this.openingRecord.setAccountNumber(accountNumber);
+    }
 
     public OpeningRecord getOpeningRecord() {
         return openingRecord;

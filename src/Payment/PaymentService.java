@@ -9,12 +9,25 @@ import java.util.List;
 /**
  * Created by Elise on 2016-10-14.
  */
+
+
+
+
 public class PaymentService extends Payment implements PaymentReceiver{
 
     private List<String> lines;
 
     public PaymentService(List<String> lines){
         this.lines = lines;
+
+    }
+
+    public void setOpeningRecord(){
+        String tmp = "";
+        String openingRecordStr = this.lines.get(0);
+
+        tmp = openingRecordStr.substring(PaymentService_.ACOOUNT_NUMBER.start(), PaymentService_.ACOOUNT_NUMBER.end());
+        super.setAccountNumber(tmp);
 
 
     }
@@ -37,9 +50,7 @@ public class PaymentService extends Payment implements PaymentReceiver{
     @Override
     public String toString(){
         String string = "";
-        for(String line: this.lines) {
-            string += line;
-        }
+
         return string;
     }
 }
