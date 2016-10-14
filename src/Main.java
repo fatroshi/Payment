@@ -1,5 +1,4 @@
-import Payment.PaymentService;
-import Payment.ReadFile;
+
 
 /**
  * Created by Elise on 2016-10-14.
@@ -7,11 +6,9 @@ import Payment.ReadFile;
 public class Main {
 
     public static void main(String[] args) {
-        ReadFile readFile = new ReadFile("resources/Exempelfil_betalningsservice.txt", "ISO-8859-1");
-        PaymentService ps = new PaymentService(readFile.getLines());
-
-        System.out.println(ps.toString());
-
+        PaymentController pc = new PaymentController();
+        pc.performTask("resources/Exempelfil_betalningsservice.txt");
+        pc.performTask("resources/Exempelfil_betalningsservice.txt");
 
     }
 }
