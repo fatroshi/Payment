@@ -6,13 +6,12 @@ import java.util.List;
  * Created by Elise on 2016-10-14.
  */
 public class PaymentController {
-    private ReadFile readFile;
 
     public PaymentController (){
 
     }
 
-    public void performTask(String filePath){
+    public static void performTask(String filePath){
         String segment[] = filePath.split("_");
         String task = segment[segment.length -1];
 
@@ -29,8 +28,8 @@ public class PaymentController {
 
     }
 
-    public List<String> getFileContent(String path, String charset){
-        this.readFile = new ReadFile(path, charset);
+    public static List<String> getFileContent(String path, String charset){
+        ReadFile readFile = new ReadFile(path, charset);
         return readFile.getLines();
     }
 
