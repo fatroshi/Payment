@@ -32,4 +32,15 @@ public class OpeningRecord {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
+
+
+    @Override
+    public String toString(){
+        String infoAboutObject = "";
+        infoAboutObject += "Öppningspost\n";
+        infoAboutObject += "Posttyp: "           + this.getPostType()        + "\t";
+        infoAboutObject += "Clearingnummer: "    + this.getClearingNumber()  + "\t";
+        infoAboutObject += "Kontonummer: "       + this.getAccountNumber()   + "\t";
+        return infoAboutObject;
+    }
 }

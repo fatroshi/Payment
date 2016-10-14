@@ -33,4 +33,14 @@ public class PaymentRecord {
     public void setReference(String reference) {
         this.reference = reference;
     }
+
+    @Override
+    public String toString(){
+        String infoAboutObject = "";
+        infoAboutObject += "### Betalningspost\n";
+        infoAboutObject += "Posttyp: "   + this.getPostType()        + "\t";
+        infoAboutObject += "Belopp: "    + this.getAmount()          + "\t";
+        infoAboutObject += "Referens: "  + this.getReference()       + "\t";
+        return infoAboutObject;
+    }
 }

@@ -19,8 +19,6 @@ public class PaymentService extends Payment implements PaymentReceiver{
 
     }
 
-
-
     @Override
     public void startPaymentBundle(String accountNumber, Date paymentDate, String currency) {
 
@@ -34,5 +32,14 @@ public class PaymentService extends Payment implements PaymentReceiver{
     @Override
     public void endPaymentBundle() {
 
+    }
+
+    @Override
+    public String toString(){
+        String string = "";
+        for(String line: this.lines) {
+            string += line;
+        }
+        return string;
     }
 }
