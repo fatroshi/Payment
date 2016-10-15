@@ -13,9 +13,11 @@ import java.util.List;
 public class Payment {
     private OpeningRecord openingRecord;
     private List<PaymentRecord> paymentRecords;
+    private PaymentError paymentError;
 
     public Payment(){
-        this.openingRecord = new OpeningRecord();
+        this.paymentError   = new PaymentError();
+        this.openingRecord  = new OpeningRecord();
         this.paymentRecords = new ArrayList<>();
     }
 
@@ -90,4 +92,9 @@ public class Payment {
         BigDecimal bigDecimal = new BigDecimal(strToBigDecimal);
         return bigDecimal;
     }
+
+    public PaymentError getPaymentError(){
+        return this.paymentError;
+    }
+
 }

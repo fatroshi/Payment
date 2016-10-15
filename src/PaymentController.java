@@ -26,6 +26,7 @@ public class PaymentController {
                 System.out.println(invoicePayment.toString());
                 break;
             default:
+                System.out.println("ERROR: No Class found for handling the file: \n\"" + filePath + "\"");
                 break;
         }
 
