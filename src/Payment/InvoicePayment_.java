@@ -6,11 +6,11 @@ package Payment;
 public enum InvoicePayment_ {
     OPENING_RECORD_POST_TYPE(0,2),
     CLEARING(10,14),
-    ACOUNT(14,24),
-    ACCOUNT_NUMER(10,24),
+    ACCOUNT_NUMBER(14,24),
+    ACCOUNT(10,24),
 
-    INVOICE_PAYMENT_POST_TYPE(0,2),
-    AMOUNT(2,22),
+    PAYMENT_POST_TYPE(0,2),
+    PAYMENT_AMOUNT(2,22),
     REFERENCE(40,65),
 
     END_POST_POST_TYPE(0,2),

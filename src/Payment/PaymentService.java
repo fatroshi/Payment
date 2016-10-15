@@ -32,9 +32,9 @@ public class PaymentService extends Payment implements PaymentReceiver{
         // Set post type
         tmp = openingRecordStr.substring(PaymentService_.OPENING_RECORD_POST_TYPE.start(), PaymentService_.OPENING_RECORD_POST_TYPE.end());
         super.setOpeningRecordPostType(tmp);
-        // Set account number
+        // Set account
         tmp = openingRecordStr.substring(PaymentService_.ACOOUNT_NUMBER.start(), PaymentService_.ACOOUNT_NUMBER.end());
-        super.setAccountNumber(tmp);
+        super.setAccount(tmp);
         // Set amount
         tmp = openingRecordStr.substring(PaymentService_.TOTAL_AMOUNT.start(), PaymentService_.TOTAL_AMOUNT.end());
         this.setAmount(super.strToBigDecimal(tmp));

@@ -23,37 +23,26 @@ public class Payment {
         this.openingRecord.setPostType(postType);
     }
 
-    public void setAccountNumber(String accountNumber){
-        if(accountNumber.contains(" ")) {
-            String segments[] = accountNumber.split(" ");
+    public void setAccount(String account){
+        if(account.contains(" ")) {
+            String segments[] = account.split(" ");
             this.openingRecord.setClearing(segments[0]);
             this.openingRecord.setAccountNumber(segments[1]);
         }else{
-            this.openingRecord.setAccount(accountNumber);
+            this.openingRecord.setAccount(account);
         }
 
     }
 
-    public void setPaymentRecords(int paymentQuantity, List<String> lines){
-        String postType;
-        String amount;
-        String reference;
-        PaymentRecord paymentRecord;
-
-        String line;
-
-        for(int i = 1; i < paymentQuantity + 1; i++ ){
-            line = lines.get(i);
-            // Get info from line
-            postType    = line.substring(PaymentService_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.end());
-            amount      = line.substring(PaymentService_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.end());
-            reference   = line.substring(PaymentService_.REFERENCE.start(), PaymentService_.REFERENCE.end());
-            // Create PaymentRecord object
-            paymentRecord = new PaymentRecord(postType,strToBigDecimal(amount),reference);
-            // Add to list
-            addPaymentRecord(paymentRecord);
-        }
+    public void setAccountNumber(String account){
+        this.openingRecord.setAccountNumber(account);
     }
+
+    public void setClearing(String clearing){
+        this.openingRecord.setClearing(clearing);
+    }
+
+
 
     public OpeningRecord getOpeningRecord() {
         return openingRecord;

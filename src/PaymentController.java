@@ -12,7 +12,7 @@ public class PaymentController {
 
     }
 
-    public static void performTask(String filePath){
+    public static void performPaymentTask(String filePath){
         String segment[] = filePath.split("_");
         String task = segment[segment.length -1];
 

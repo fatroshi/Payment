@@ -15,13 +15,13 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
     private int paymentQuantity;
     private List<String> lines;
     private BigDecimal amount;
-    private final String CURRENCY = "SEK";
+    private String currency = "SEK";
 
     public InvoicePayment(List<String> lines){
         this.lines = lines;
         this.setOpeningRecord();
         this.setEndRecord();
-        super.setPaymentRecords(this.paymentQuantity,this.lines);
+        this.setPaymentRecords();
     }
 
     private void setOpeningRecord() {
@@ -29,10 +29,13 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
         String openingRecordStr = this.lines.get(0);
 
         // Set post type
-        tmp = openingRecordStr.substring(PaymentService_.OPENING_RECORD_POST_TYPE.start(), PaymentService_.OPENING_RECORD_POST_TYPE.end());
+        tmp = openingRecordStr.substring(InvoicePayment_.OPENING_RECORD_POST_TYPE.start(), InvoicePayment_.OPENING_RECORD_POST_TYPE.end());
         super.setOpeningRecordPostType(tmp);
+        // Set clearing number
+        tmp = openingRecordStr.substring(InvoicePayment_.CLEARING.start(), InvoicePayment_.CLEARING.end());
+        super.setClearing(tmp);
         // Set account number
-        tmp = openingRecordStr.substring(PaymentService_.ACOOUNT_NUMBER.start(), PaymentService_.ACOOUNT_NUMBER.end());
+        tmp = openingRecordStr.substring(InvoicePayment_.ACCOUNT_NUMBER.start(), InvoicePayment_.ACCOUNT_NUMBER.end());
         super.setAccountNumber(tmp);
     }
 
@@ -52,6 +55,27 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
 
     }
 
+
+    private void setPaymentRecords(){
+        String postType;
+        String amount;
+        String reference;
+        PaymentRecord paymentRecord;
+
+        String line;
+
+        for(int i = 1; i < this.paymentQuantity + 1; i++ ){
+            line = this.lines.get(i);
+            // Get info from line
+            postType    = line.substring(InvoicePayment_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.end());
+            amount      = line.substring(InvoicePayment_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.end());
+            reference   = line.substring(InvoicePayment_.REFERENCE.start(), PaymentService_.REFERENCE.end());
+            // Create PaymentRecord object
+            paymentRecord = new PaymentRecord(postType,super.strToBigDecimal(amount),reference);
+            // Add to list
+            super.addPaymentRecord(paymentRecord);
+        }
+    }
 
     public String getEndPostType() {
         return endPostType;
@@ -85,6 +109,14 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
         this.amount = amount;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public void startPaymentBundle(String accountNumber, Date paymentDate, String currency) {
 
@@ -98,5 +130,19 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
     @Override
     public void endPaymentBundle() {
 
+    }
+
+    @Override
+    public String toString(){
+        String info = "";
+        info += super.getOpeningRecord().toString();
+        info += "Betalningsdatum: " + "SAKNAS" + "";
+        info += "\nValuta: "          + this.getCurrency() + "\n";
+        info += "### Betalningspost\n";
+        for(PaymentRecord payment: super.getPaymentRecords()){
+            info += payment.toString();
+        }
+
+        return info;
     }
 }
