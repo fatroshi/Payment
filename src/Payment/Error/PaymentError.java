@@ -1,7 +1,5 @@
 package Payment.Error;
 
-import Payment.Payment;
-
 import java.util.ArrayList;
 import java.util.List;
 
