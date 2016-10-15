@@ -1,4 +1,6 @@
-package Payment;
+package Payment.Records;
+
+import Payment.Payment;
 
 import java.math.BigDecimal;
 

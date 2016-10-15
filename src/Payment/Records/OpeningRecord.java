@@ -1,4 +1,6 @@
-package Payment;
+package Payment.Records;
+
+
 
 /**
  * Created by Elise on 2016-10-14.

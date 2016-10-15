@@ -1,5 +1,7 @@
 package Payment;
 
+import Payment.Enum.InvoicePayment_;
+import Payment.Records.PaymentRecord;
 import itello.example.payments.PaymentReceiver;
 
 import java.math.BigDecimal;
