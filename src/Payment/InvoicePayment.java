@@ -67,9 +67,9 @@ public class InvoicePayment extends Payment implements PaymentReceiver{
         for(int i = 1; i < this.paymentQuantity + 1; i++ ){
             line = this.lines.get(i);
             // Get info from line
-            postType    = line.substring(InvoicePayment_.PAYMENT_POST_TYPE.start(), PaymentService_.PAYMENT_POST_TYPE.end());
-            amount      = line.substring(InvoicePayment_.PAYMENT_AMOUNT.start(), PaymentService_.PAYMENT_AMOUNT.end());
-            reference   = line.substring(InvoicePayment_.REFERENCE.start(), PaymentService_.REFERENCE.end());
+            postType    = line.substring(InvoicePayment_.PAYMENT_POST_TYPE.start(), InvoicePayment_.PAYMENT_POST_TYPE.end());
+            amount      = line.substring(InvoicePayment_.PAYMENT_AMOUNT.start(), InvoicePayment_.PAYMENT_AMOUNT.end());
+            reference   = line.substring(InvoicePayment_.REFERENCE.start(), InvoicePayment_.REFERENCE.end());
             // Create PaymentRecord object
             paymentRecord = new PaymentRecord(postType,super.strToBigDecimal(amount),reference);
             // Add to list

@@ -6,7 +6,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        PaymentController.performPaymentTask("resources/Exempelfil_betalningsservice.txt");
+        //PaymentController.performPaymentTask("resources/Exempelfil_betalningsservice.txt");
         PaymentController.performPaymentTask("resources/Exempelfil_inbetalningstjansten.txt");
 
     }
