@@ -42,8 +42,6 @@ public class Payment {
         this.openingRecord.setClearing(clearing);
     }
 
-
-
     public OpeningRecord getOpeningRecord() {
         return openingRecord;
     }
